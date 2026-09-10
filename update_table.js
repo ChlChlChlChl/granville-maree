@@ -22,7 +22,7 @@ async function run() {
     if (!res.ok) throw new Error(`Erreur HTTP: ${res.status}`);
     const json = await res.json();
     
-    const tableRows = [];
+    const flatCells = [];
 
     if (json.data && Array.isArray(json.data)) {
       const daysToKeep = json.data.slice(0, 2);
@@ -32,28 +32,22 @@ async function run() {
         
         if (dayData.extrema && Array.isArray(dayData.extrema)) {
           dayData.extrema.forEach(e => {
-            // Arrondi propre de la hauteur à 1 décimale (ex: 12.2m)
             const hFormatted = e.height ? `${Math.round(e.height * 10) / 10}m` : "-";
             
-            // Chaque marée est sa propre ligne [Jour, Type, Heure, Coef, Hauteur]
-            tableRows.push([
-              jourLabel,
-              e.type || "-",
-              e.time || "--:--",
-              e.coef ? String(e.coef) : "-",
-              hFormatted
-            ]);
+            // On push chaque valeur séquentiellement (5 valeurs par ligne du tableau)
+            flatCells.push(jourLabel);
+            flatCells.push(e.type || "-");
+            flatCells.push(e.time || "--:--");
+            flatCells.push(e.coef ? String(e.coef) : "-");
+            flatCells.push(hFormatted);
           });
         }
       });
     }
 
-    // Formatage : 1 ligne par marée
-    const formattedRows = tableRows.map(row => '  ' + JSON.stringify(row)).join(',\n');
-    const outputText = `[\n${formattedRows}\n]`;
-
-    fs.writeFileSync('maree_table.json', outputText);
-    console.log("Fichier maree_table.json généré au format sous-tableaux par ligne.");
+    // Sauvegarde du tableau 1D
+    fs.writeFileSync('maree_table.json', JSON.stringify(flatCells, null, 2));
+    console.log("Fichier maree_table.json généré au format plat 1D.");
 
   } catch (err) {
     console.error("Erreur lors de la récupération :", err);
