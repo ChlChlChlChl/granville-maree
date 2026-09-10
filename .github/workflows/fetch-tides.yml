@@ -22,7 +22,8 @@ jobs:
       - name: Fetch Tide Data
         env:
           API_KEY_MAREE: ${{ secrets.API_KEY_MAREE }}
-        run: node update.js
+        run: node update_json.js
+        run: node update_table.js
 
       - name: Commit & Push JSON
         run: |
