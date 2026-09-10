@@ -1,0 +1,74 @@
+{
+  "site_id": "granville",
+  "site_name": "Granville",
+  "timezone": "Europe/Paris",
+  "from": "2026-09-10T00:00:00+02:00",
+  "to": "2026-09-12T00:00:00+02:00",
+  "unit": "m",
+  "source": {
+    "title": "Atlas de composantes harmoniques",
+    "producer": "IFREMER",
+    "project": "PREVIMER",
+    "catalog": "Sextant",
+    "metadata_url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/1bc4a49d-d4cd-469e-827c-bd3bd0eeabba/formatters/xsl-view",
+    "license_notice": "Données sous Licence Creative Commons - Attribution (BY)",
+    "attribution": "Données de marée fournies par <a href=\"https://api-maree.fr/\">api-maree.fr</a> sous licence <a href=\"https://creativecommons.org/licenses/by/4.0/deed.fr\">CC BY</a>, calculées à partir de composantes harmoniques <a href=\"https://sextant.ifremer.fr/geonetwork/srv/api/records/1bc4a49d-d4cd-469e-827c-bd3bd0eeabba/formatters/xsl-view\">Ifremer / PREVIMER</a>, elles-mêmes sous licence <a href=\"https://creativecommons.org/licenses/by/4.0/deed.fr\">CC BY</a>.",
+    "status_notice": "L’utilisation et l’interprétation des données relèvent de la responsabilité de l’utilisateur."
+  },
+  "data": [
+    {
+      "date": "2026-09-10",
+      "extrema": [
+        {
+          "type": "BM",
+          "time": "02:11",
+          "height": 1.749
+        },
+        {
+          "type": "PM",
+          "time": "07:28",
+          "height": 12.222,
+          "coef": 90
+        },
+        {
+          "type": "BM",
+          "time": "14:32",
+          "height": 1.676
+        },
+        {
+          "type": "PM",
+          "time": "19:46",
+          "height": 12.806,
+          "coef": 96
+        }
+      ]
+    },
+    {
+      "date": "2026-09-11",
+      "extrema": [
+        {
+          "type": "BM",
+          "time": "02:55",
+          "height": 1.048
+        },
+        {
+          "type": "PM",
+          "time": "08:07",
+          "height": 12.817,
+          "coef": 99
+        },
+        {
+          "type": "BM",
+          "time": "15:14",
+          "height": 1.154
+        },
+        {
+          "type": "PM",
+          "time": "20:24",
+          "height": 13.254,
+          "coef": 102
+        }
+      ]
+    }
+  ]
+}
