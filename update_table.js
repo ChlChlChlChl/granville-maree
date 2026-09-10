@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const API_KEY = process.env.API_KEY_MAREE;
-const API_URL = `https://www.api-maree.fr/m/json/?key=${API_KEY}&port=Granville`;
+const API_URL = `https://api-maree.fr/m/json/?key=${API_KEY}&port=Granville`;
 
 async function fetchAndTransform() {
   try {
