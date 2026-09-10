@@ -2,8 +2,8 @@ name: Update Tide JSON
 
 on:
   schedule:
-    - cron: '5 0 * * *' # Exécution automatique chaque nuit à 00h05 UTC
-  workflow_dispatch: # Permet le lancement manuel depuis l'interface
+    - cron: '5 0 * * *'
+  workflow_dispatch:
 
 jobs:
   update-json:
@@ -14,7 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Récupère tout l'historique Git pour éviter le mode HEAD détaché
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -31,8 +31,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git fetch origin main
-          git checkout main
+          git reset --soft origin/main
           git add maree.json
           git commit -m "Update maree.json [skip ci]" || exit 0
-          git rebase origin/main
           git push origin main
