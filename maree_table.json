@@ -1,0 +1,32 @@
+{
+  "columns": [
+    { "title": "Jour", "key": "jour" },
+    { "title": "Type", "key": "type" },
+    { "title": "Heure", "key": "heure" },
+    { "title": "Hauteur", "key": "hauteur" },
+    { "title": "Coef", "key": "coef" }
+  ],
+  "data": [
+    {
+      "jour": "Aujourd'hui",
+      "type": "Basse Mer",
+      "heure": "06:12",
+      "hauteur": "1.85 m",
+      "coef": "-"
+    },
+    {
+      "jour": "Aujourd'hui",
+      "type": "Pleine Mer",
+      "heure": "11:45",
+      "hauteur": "12.30 m",
+      "coef": "85"
+    },
+    {
+      "jour": "Demain",
+      "type": "Basse Mer",
+      "heure": "06:50",
+      "hauteur": "1.70 m",
+      "coef": "-"
+    }
+  ]
+}
