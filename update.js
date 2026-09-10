@@ -11,8 +11,30 @@ async function run() {
 
   try {
     const res = await fetch(url);
-    const data = await res.json();
-    fs.writeFileSync('maree.json', JSON.stringify(data, null, 2));
+    const json = await res.json();
+    
+    // Reformatage des données à plat pour le composant Table de SenseCraft
+    const tableData = [];
+
+    if (json.data && Array.isArray(json.data)) {
+      json.data.forEach((dayData, dayIndex) => {
+        const jourLabel = dayIndex === 0 ? "Aujourd'hui" : "Demain";
+        if (dayData.extrema && Array.isArray(dayData.extrema)) {
+          dayData.extrema.forEach(e => {
+            tableData.push({
+              jour: jourLabel,
+              type: e.type || "",
+              heure: e.time || "",
+              hauteur: e.height ? `${e.height}m` : "",
+              coef: e.coef ? `${e.coef}` : "-"
+            });
+          });
+        }
+      });
+    }
+
+    // Sauvegarde du JSON formaté pour le widget Table
+    fs.writeFileSync('maree.json', JSON.stringify(tableData, null, 2));
     console.log("Fichier maree.json mis à jour avec succès.");
   } catch (err) {
     console.error("Erreur lors de la récupération:", err);
