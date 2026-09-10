@@ -13,13 +13,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
+        uses: actions/setup-node@v20
 
       - name: Fetch Tide Data
         env:
@@ -27,11 +23,7 @@ jobs:
         run: node update.js
 
       - name: Commit & Push JSON
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch origin main
-          git reset --soft origin/main
-          git add maree.json
-          git commit -m "Update maree.json [skip ci]" || exit 0
-          git push origin main
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update maree.json [skip ci]"
+          file_pattern: "maree.json"
