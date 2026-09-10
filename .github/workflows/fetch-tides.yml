@@ -33,7 +33,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add maree.json maree_table.json
+          git add maree.json maree_table_J0.json maree_table_J1.json
           git commit -m "Update JSON file by Robot Action" || exit 0
           git pull --rebase origin main
           git push
