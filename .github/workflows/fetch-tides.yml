@@ -33,7 +33,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add maree.json
+          git add maree.json maree_table.json
           git commit -m "Update maree.json [skip ci]" || exit 0
           git pull --rebase origin main
           git push
