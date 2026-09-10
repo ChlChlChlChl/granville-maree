@@ -22,47 +22,41 @@ async function run() {
     if (!res.ok) throw new Error(`Erreur HTTP: ${res.status}`);
     const json = await res.json();
 
-    // Fonction pour générer le tableau à plat transposé d'une journée
-    const buildDayTable = (dayData, jourLabel) => {
-      const jours = [];
+    // Fonction pour générer le tableau à plat (Types, Heures, Coefs)
+    const buildDayTable = (dayData) => {
       const types = [];
       const heures = [];
       const coefs = [];
-      const hauteurs = [];
 
       if (dayData && dayData.extrema && Array.isArray(dayData.extrema)) {
         dayData.extrema.forEach(e => {
-          const hFormatted = e.height ? `${Math.round(e.height * 10) / 10}m` : "-";
           const cFormatted = e.coef ? String(Math.round(e.coef)) : "-";
           
-          jours.push(jourLabel);
           types.push(e.type || "-");
           heures.push(e.time || "--:--");
           coefs.push(cFormatted);
-          hauteurs.push(hFormatted);
         });
       }
 
+      // Ordre : Types, Heures, Coefs
       return [
-        ...jours,
         ...types,
         ...heures,
-        ...coefs,
-        ...hauteurs
+        ...coefs
       ];
     };
 
     if (json.data && Array.isArray(json.data)) {
       // J0 = Aujourd'hui (index 0)
       if (json.data[0]) {
-        const j0Flat = buildDayTable(json.data[0], "Aujourd'hui");
+        const j0Flat = buildDayTable(json.data[0]);
         fs.writeFileSync('maree_table_J0.json', JSON.stringify(j0Flat, null, 2));
         console.log("Fichier maree_table_J0.json généré avec succès !");
       }
 
       // J1 = Demain (index 1)
       if (json.data[1]) {
-        const j1Flat = buildDayTable(json.data[1], "Demain");
+        const j1Flat = buildDayTable(json.data[1]);
         fs.writeFileSync('maree_table_J1.json', JSON.stringify(j1Flat, null, 2));
         console.log("Fichier maree_table_J1.json généré avec succès !");
       }
