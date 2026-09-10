@@ -1,0 +1,33 @@
+name: Update Tide JSON
+
+on:
+  schedule:
+    - cron: '5 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-json:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch Tide Data
+        env:
+          API_KEY_MAREE: ${{ secrets.API_KEY_MAREE }}
+        run: node update.js
+
+      - name: Commit & Push JSON
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add maree.json
+          git commit -m "Update maree.json [skip ci]" || exit 0
+          git push --force origin HEAD:${{ github.ref_name }}
