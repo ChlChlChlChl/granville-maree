@@ -30,7 +30,10 @@ async function run() {
 
       if (dayData && dayData.extrema && Array.isArray(dayData.extrema)) {
         dayData.extrema.forEach(e => {
-          const cFormatted = e.coef ? String(Math.round(e.coef)) : "-";
+          // Arrondi à l'entier le plus proche et conversion en String pour éviter les .0 ou .00
+          const cFormatted = (e.coef !== undefined && e.coef !== null && e.coef !== "" && e.coef !== "-") 
+            ? String(Math.round(Number(e.coef))) 
+            : "-";
           
           types.push(e.type || "-");
           heures.push(e.time || "--:--");
