@@ -24,10 +24,9 @@ jobs:
           API_KEY_MAREE: ${{ secrets.API_KEY_MAREE }}
         run: node update.js
 
-      - name: Deploy to GitHub Pages / Data Branch
+      - name: Deploy maree.json to gh-pages branch
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
           publish_branch: gh-pages
-          destination_dir: .
