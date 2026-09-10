@@ -19,10 +19,14 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Fetch Tide Data
+      - name: Fetch Tide Data for json
         env:
           API_KEY_MAREE: ${{ secrets.API_KEY_MAREE }}
         run: node update_json.js
+
+      - name: Fetch Tide Data for table
+        env:
+          API_KEY_MAREE: ${{ secrets.API_KEY_MAREE }}
         run: node update_table.js
 
       - name: Commit & Push JSON
