@@ -1,11 +1,11 @@
 const fs = require('fs');
 
-// Calcule la date locale (Europe/Paris) au format YYYY-MM-DD.
+// Calcule la date locale (Europe/Paris) au format JJ/MM/AAAA.
 // IMPORTANT : on n'utilise pas toISOString() ici, car elle renvoie la date en UTC.
 // Entre minuit et ~2h du matin en France (heure d'été), toISOString() donnerait
 // encore la date de la veille. On force donc le calcul dans le fuseau Europe/Paris.
-function getLocalDateISO(date, timeZone = 'Europe/Paris') {
-  const parts = new Intl.DateTimeFormat('en-CA', {
+function getLocalDateFR(date, timeZone = 'Europe/Paris') {
+  const parts = new Intl.DateTimeFormat('fr-FR', {
     timeZone,
     year: 'numeric',
     month: '2-digit',
@@ -16,20 +16,17 @@ function getLocalDateISO(date, timeZone = 'Europe/Paris') {
   const m = parts.find(p => p.type === 'month').value;
   const d = parts.find(p => p.type === 'day').value;
 
-  return `${y}-${m}-${d}`; // format YYYY-MM-DD
+  return `${d}/${m}/${y}`; // format JJ/MM/AAAA
 }
 
 async function run() {
   try {
     const now = new Date();
-    const dateJ0 = getLocalDateISO(now);
+    const dateJ0 = getLocalDateFR(now);
 
-    const payload = {
-      date_j0: dateJ0,
-      genere_le: now.toISOString(), // horodatage exact de génération, utile pour debug
-    };
+    const payload = [dateJ0];
 
-    fs.writeFileSync('maree_J0.json', JSON.stringify(payload, null, 2));
+    fs.writeFileSync('date_j0.json', JSON.stringify(payload, null, 2));
     console.log(`Fichier date_j0.json généré avec succès ! Date J0 = ${dateJ0}`);
   } catch (err) {
     console.error("Erreur lors de la génération de la date J0 :", err);
