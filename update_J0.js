@@ -26,7 +26,7 @@ async function run() {
 
     const payload = [dateJ0];
 
-    fs.writeFileSync('date_j0.json', JSON.stringify(payload, null, 2));
+    fs.writeFileSync('maree_j0.json', JSON.stringify(payload, null, 2));
     console.log(`Fichier date_j0.json généré avec succès ! Date J0 = ${dateJ0}`);
   } catch (err) {
     console.error("Erreur lors de la génération de la date J0 :", err);
