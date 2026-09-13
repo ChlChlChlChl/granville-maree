@@ -29,6 +29,11 @@ jobs:
           API_KEY_MAREE: ${{ secrets.API_KEY_MAREE }}
         run: node update_table.js
 
+      - name: Fetch Tide Date J0
+        env:
+          API_KEY_MAREE: ${{ secrets.API_KEY_MAREE }}
+        run: node update_J0.js
+
       - name: Commit & Push JSON
         run: |
           git config --global user.name "github-actions[bot]"
