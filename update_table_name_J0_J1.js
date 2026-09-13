@@ -38,8 +38,8 @@ async function run() {
 
     const payload = [dateJ0, jourJ0, dateJ1, jourJ1];
 
-    fs.writeFileSync('date_j0.json', JSON.stringify(payload, null, 2));
-    console.log(`Fichier date_j0.json généré avec succès ! J0 = ${jourJ0} ${dateJ0} | J1 = ${jourJ1} ${dateJ1}`);
+    fs.writeFileSync('maree_date_J0.json', JSON.stringify(payload, null, 2));
+    console.log(`Fichier maree_date_J0.json généré avec succès ! J0 = ${jourJ0} ${dateJ0} | J1 = ${jourJ1} ${dateJ1}`);
   } catch (err) {
     console.error("Erreur lors de la génération de la date J0 :", err);
     process.exit(1);
