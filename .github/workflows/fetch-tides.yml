@@ -32,7 +32,7 @@ jobs:
       - name: Fetch Tide Date J0
         env:
           API_KEY_MAREE: ${{ secrets.API_KEY_MAREE }}
-        run: node update_J0.js
+        run: node update_table_name_J0_J1.js
 
       - name: Commit & Push JSON
         run: |
